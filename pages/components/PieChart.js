@@ -130,7 +130,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale);
 const PieChart = ({ data = {} }) => {
     // Ensure data has default values for labels and values
     const chartData = {
-        labels: data.labels || [], // Default to empty array if data.labels is undefined
+        labels: data.labels || [],
         datasets: [
             {
                 data: data.values || [], // Default to empty array if data.values is undefined
@@ -142,11 +142,15 @@ const PieChart = ({ data = {} }) => {
 
     return (
         <div className="bg-gradient-to-r from-slate-300 to-indigo-500 p-6 rounded-lg shadow-md flex justify-center items-center w-full h-full mt-4">
+          {data && data.labels && data.values ? (
             <div className='w-full h-80 flex justify-center items-center'>
-                <Pie data={chartData} />
+              <Pie data={chartData} />
             </div>
+          ) : (
+            <p>No data available to display chart.</p>
+          )}
         </div>
-    );
+      );
 };
 
 export default PieChart;
